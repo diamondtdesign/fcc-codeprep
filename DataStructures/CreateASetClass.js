@@ -6,11 +6,11 @@
 // This can be implemented with an object, for instance:
 
 // Part 1: https://learn.freecodecamp.org/coding-interview-prep/data-structures/create-a-set-class
+// Instructions: Add to the set if the collection doesn't contain the item
+// return true if added, false if not.
 
-// Instructions: create a function that will add a value
-// to our set collection as long as the value does not
-// already exist in the set. The function should return true if the value
-// is successfully added and false otherwise.
+// Part 2: https://learn.freecodecamp.org/coding-interview-prep/data-structures/remove-from-a-set
+// Instructions: Remove item from the set, true if removed, false if not removed.
 
 function Set() {
   // the var collection will hold our set
@@ -23,13 +23,24 @@ function Set() {
   this.values = function() {
       return collection;
   };
-  // change code below this line
+  //Part 1: change code below this line
   this.add = element => {
     if (collection.includes(element)) {
       return false;
     } else {
       collection.push(element);
       return true;
+    }
+  }
+  // change code above this line
+  //Part 2: change code below this line
+  this.remove = element => {
+    let index = collection.indexOf(element);
+    if (index === -1) {
+        return false;
+    } else {
+        collection.splice(index, 1);
+        return true;
     }
   }
   // change code above this line
