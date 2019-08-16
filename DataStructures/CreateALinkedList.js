@@ -34,6 +34,27 @@ function LinkedList() {
     }
     // Only change code above this line
   };
+
+  // Part 2: Remove an element from a linked list
+  this.remove = function(element){
+    // Only change code below this line
+    if (head.element === element) {
+      head = head.next;
+      length -= 1;
+      return;
+    } else {
+      let node = head;
+      while (node !== null) {
+        if (node.next.element == element) {
+          node.next = node.next.next;
+          length -= 1;
+          return;
+        }
+        node = node.next;
+      }
+    }
+    // Only change code above this line
+  };
 }
 
 
