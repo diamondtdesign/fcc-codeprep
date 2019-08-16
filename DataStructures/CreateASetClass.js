@@ -20,6 +20,11 @@
 // Method should take another set, and return the union between the two sets
 // excluding any duplicate values.
 
+// Part 5: https://learn.freecodecamp.org/coding-interview-prep/data-structures/perform-an-intersection-on-two-sets-of-data
+// Instructions: Perform an intersection on 2 sets of data.
+// Method called intersection on a set, takes another set,
+// and return the intersection of the two sets.
+
 function Set() {
   // the var collection will hold our set
   var collection = [];
@@ -67,6 +72,17 @@ function Set() {
         union.add(element);
     })
     return union;
+  }
+  // change code above this line
+  //Part 5 change code below this line
+     this.intersection = (setB) => {
+      let intersection = new Set();
+      collection.forEach(element => {
+          if (setB.has(element)) {
+              intersection.add(element);
+          }
+      })
+      return intersection;
   }
   // change code above this line
 }
