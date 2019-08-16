@@ -25,12 +25,11 @@ function LinkedList() {
       head = new Node(element);
       length = 1;
     } else {
-        let added = new Node(element);
         let node = head;
         while(node.next !== null) {
             node = node.next;
         }
-        node.next = added;
+        node.next = new Node(element);
         length += 1;
     }
     // Only change code above this line
