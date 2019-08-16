@@ -12,6 +12,9 @@
 // Part 2: https://learn.freecodecamp.org/coding-interview-prep/data-structures/remove-from-a-set
 // Instructions: Remove item from the set, true if removed, false if not removed.
 
+// Part 3: https://learn.freecodecamp.org/coding-interview-prep/data-structures/size-of-the-set
+// Instructions: this.size should return the size of the collection.
+
 function Set() {
   // the var collection will hold our set
   var collection = [];
@@ -42,6 +45,11 @@ function Set() {
         collection.splice(index, 1);
         return true;
     }
+  }
+  // change code above this line
+  //Part 3: change code below this line
+  this.size = () => {
+    return collection.length;
   }
   // change code above this line
 }
