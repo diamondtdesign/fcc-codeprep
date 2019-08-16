@@ -55,6 +55,33 @@ function LinkedList() {
     }
     // Only change code above this line
   };
+
+  // Part 3:
+  // indexOf takes an element, and returns the index in the linked list / -1.
+  // elementAt takes an index, and returns the element / undefined.
+  this.indexOf = function(element) {
+    let i = 0;
+    let node = head;
+    while (node !== null) {
+      if (node.element === element) {
+        return i;
+      }
+      i += 1;
+      node = node.next;
+    }
+    return -1;
+  }
+
+  this.elementAt = function(index) {
+    let current = 0;
+    let node = head;
+    while (current < index) {
+      node = node.next;
+      current += 1;
+    }
+    return node.element;
+  }
+
 }
 
 
