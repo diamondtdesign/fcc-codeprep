@@ -92,7 +92,7 @@ function LinkedList() {
     let prev;
     let current = 0;
     while (current < index) {
-      if (node !== null && node.next !==null) {
+      if (node !== null && node.next !== null) {
         prev = node;
         node = node.next;
         current += 1;
@@ -103,6 +103,32 @@ function LinkedList() {
     length -= 1;
     prev.next = node.next;
     return node.element;
+  }
+
+
+  // Part 5:
+  // addAt(index, element) adds the element at the index of the linked list.
+  // return false if unable to add element. (Doesn't say to return anything if successfully added)
+  this.addAt = function(index, element) {
+    if (index < 0) {
+      return false;
+    }
+    let node = head;
+    let prev = head;
+    let current = 0;
+    while (current < index && node.next !== null) {
+      prev = node;
+      node = node.next;
+      current += 1;
+    }
+    if (current === index) {
+      let newNode = new Node(element);
+      prev.next = newNode;
+      newNode.next = node;
+      length += 1;
+    } else {
+      return false;
+    }
   }
 
 }
