@@ -30,6 +30,10 @@
 // Method called difference takes another Set and returns the difference
 // of the two sets.
 
+// Part 7: https://learn.freecodecamp.org/coding-interview-prep/data-structures/perform-a-subset-check-on-two-sets-of-data
+// Instructions: Perform a subset test of 2 sets.
+// Method called subset, which returns true if the first set is fully contained
+// within the second set, otherwise returns false.
 
 function Set() {
   // the var collection will hold our set
@@ -105,6 +109,16 @@ function Set() {
         }
     })
     return difference;
+  }
+  // change code above this line
+  //Part 7: change code below this line
+  this.subset = setB => {
+    collection.forEach(element => {
+        if (!setB.has(element)) {
+            return false;
+        }
+    })
+    return true;
   }
   // change code above this line
 }
