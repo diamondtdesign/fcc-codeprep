@@ -82,6 +82,29 @@ function LinkedList() {
     return node.element;
   }
 
+  // Part 4:
+  // removeAt takes an index, removes the element at the index and returns it / null.
+  this.removeAt = function(index) {
+    if (index < 0) {
+      return null;
+    }
+    let node = head;
+    let prev;
+    let current = 0;
+    while (current < index) {
+      if (node !== null && node.next !==null) {
+        prev = node;
+        node = node.next;
+        current += 1;
+      } else {
+        return null;
+      }
+    }
+    length -= 1;
+    prev.next = node.next;
+    return node.element;
+  }
+
 }
 
 
