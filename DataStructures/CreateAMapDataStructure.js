@@ -17,9 +17,7 @@ var Map = function() {
   this.collection = {};
   // change code below this line
     this.add = (key, value) => {
-        console.log('1a');
         this.collection[key] = value;
-        return this.collection[key];
     }
 
     this.remove = (key, value) => {
