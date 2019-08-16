@@ -25,6 +25,12 @@
 // Method called intersection on a set, takes another set,
 // and return the intersection of the two sets.
 
+// Part 6: https://learn.freecodecamp.org/coding-interview-prep/data-structures/perform-a-difference-on-two-sets-of-data
+// Instructions: Perform a difference on 2 sets of data.
+// Method called difference takes another Set and returns the difference
+// of the two sets.
+
+
 function Set() {
   // the var collection will hold our set
   var collection = [];
@@ -83,6 +89,22 @@ function Set() {
           }
       })
       return intersection;
+  }
+  // change code above this line
+  //Part 6: change code below this line
+  this.difference = (setB) => {
+    let difference = new Set();
+    collection.forEach(element => {
+        if (!setB.has(element)) {
+            difference.add(element);
+        }
+    })
+    setB.values().forEach(element => {
+        if (!this.has(element)) {
+            difference.add(element);
+        }
+    })
+    return difference;
   }
   // change code above this line
 }
