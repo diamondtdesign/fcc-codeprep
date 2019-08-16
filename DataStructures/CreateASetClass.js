@@ -15,6 +15,11 @@
 // Part 3: https://learn.freecodecamp.org/coding-interview-prep/data-structures/size-of-the-set
 // Instructions: this.size should return the size of the collection.
 
+// Part 4: https://learn.freecodecamp.org/coding-interview-prep/data-structures/perform-a-union-on-two-sets
+// Instructions: Perform a union on two sets using a union function.
+// Method should take another set, and return the union between the two sets
+// excluding any duplicate values.
+
 function Set() {
   // the var collection will hold our set
   var collection = [];
@@ -28,7 +33,7 @@ function Set() {
   };
   //Part 1: change code below this line
   this.add = element => {
-    if (collection.includes(element)) {
+    if (this.has(element)) {
       return false;
     } else {
       collection.push(element);
@@ -39,7 +44,7 @@ function Set() {
   //Part 2: change code below this line
   this.remove = element => {
     let index = collection.indexOf(element);
-    if (index === -1) {
+    if (!this.has(element))  {
         return false;
     } else {
         collection.splice(index, 1);
@@ -50,6 +55,18 @@ function Set() {
   //Part 3: change code below this line
   this.size = () => {
     return collection.length;
+  }
+  // change code above this line
+  //Part 4: change code below this line
+  this.union = (setB) => {
+    let union = new Set();
+    collection.forEach(element => {
+        union.add(element);
+    })
+    setB.values().forEach(element => {
+        union.add(element);
+    })
+    return union;
   }
   // change code above this line
 }
