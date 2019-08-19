@@ -200,8 +200,6 @@ function BinarySearchTree() {
   // change code below this line
   this.inorder = () => {
     let inOrderRecursive = (values, node) => {
-        console.log(node.value);
-        console.log(values);
         // begin search at left most node.
         if (node.left !== null) {
             // explore further subtree
@@ -225,6 +223,27 @@ function BinarySearchTree() {
         return null;
     } else {
         return inOrderRecursive([], this.root);
+    }
+  }
+
+  this.preorder = () => {
+    let preOrderRecursive = (values, node) => {
+        // explore the root before the leaves.
+        values.push(node.value);
+        // explore left.
+        if (node.left !== null) {
+            values = preOrderRecursive(values, node.left);
+        }
+        // explore right
+        if (node.right !== null) {
+            values = preOrderRecursive(values, node.right);
+        }
+        return values;
+    }
+    if (this.root === null) {
+        return null;
+    } else {
+        return preOrderRecursive([], this.root);
     }
   }
   // change code above this line
