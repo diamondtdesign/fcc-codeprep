@@ -14,6 +14,10 @@
 // Instructions: Write a findMinHeight and findMaxHeight and isBalanced function for a BST.
 // Note: tests on FCC are broken, and isBalanced only passes if it always returns true.
 
+// Part 5: https://learn.freecodecamp.org/coding-interview-prep/data-structures/use-depth-first-search-in-a-binary-search-tree
+// Instructions: Write Depth First Search functions for a in-order, pre-order, and post-order search
+
+
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
     this.value = value;
@@ -244,6 +248,28 @@ function BinarySearchTree() {
         return null;
     } else {
         return preOrderRecursive([], this.root);
+    }
+  }
+
+  this.postorder = () => {
+    let postOrderRecursive = (values, node) => {
+        // explore the leaves before the root.
+        // explore left.
+        if (node.left !== null) {
+            values = postOrderRecursive(values, node.left);
+        }
+        // explore right.
+        if (node.right !== null) {
+            values = postOrderRecursive(values, node.right);
+        }
+        // explore the root after the leaves.
+        values.push(node.value);
+        return values;
+    }
+    if (this.root === null) {
+        return null;
+    } else {
+        return postOrderRecursive([], this.root);
     }
   }
   // change code above this line
