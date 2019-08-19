@@ -20,6 +20,10 @@
 // Part 6: https://learn.freecodecamp.org/coding-interview-prep/data-structures/use-breadth-first-search-in-a-binary-search-tree
 // Instructions: Write Breadth first search functions for inorder and reverseorder searches.
 
+// Part 7: https://learn.freecodecamp.org/coding-interview-prep/data-structures/delete-a-leaf-node-in-a-binary-search-tree
+// Instructions: Write a remove function that takes a value, and deletes the node if it is a leaf, return null if it is not a leaf.
+// Description also says to keep track of parent, and # of children the target node has.
+
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
     this.value = value;
@@ -317,4 +321,51 @@ function BinarySearchTree() {
     return values;
   }
   // change code above this line
+
+  // Part 7: 
+  this.remove = (value) => {
+    const findParentAndNodeRecursive = (node, direction) => {
+      if (node[direction] === null) {
+        return [null, null, null];
+      } else if (node[direction].value === value) {
+        return [node, node[direction], direction];
+      } else if (node[direction].value < value) {
+        return findParentAndNodeRecursive(node[direction], 'right');
+      } else if (node[direction].value > value) {
+        return findParentAndNodeRecursive(node[direction], 'left');
+      }
+    }
+    let [parent, removeNode, direction] = findParentAndNodeRecursive(this, 'root');
+
+    const getNumChildren = (node) => {
+      let children = 0;
+      if (node.left !== null) {
+        children += 1;
+      }
+      if (node.right !== null) {
+        children += 1;
+      }
+      return children;
+    }
+
+    if (removeNode !== null) {
+      let numChildren = getNumChildren(removeNode);
+      // case 1: target has no children, change code below this line
+      if (numChildren === 0) {
+        parent[direction] = null;
+      }
+    } else {
+        return null;
+    }
+  }
+
 }
+
+let bst = new BinarySearchTree();
+bst.add(4);
+bst.add(2);
+bst.add(1);
+bst.add(5);
+bst.add(6);
+console.log(bst.remove(2));
+displayTree(bst);
