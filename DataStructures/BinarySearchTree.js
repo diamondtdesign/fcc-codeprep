@@ -17,6 +17,8 @@
 // Part 5: https://learn.freecodecamp.org/coding-interview-prep/data-structures/use-depth-first-search-in-a-binary-search-tree
 // Instructions: Write Depth First Search functions for a in-order, pre-order, and post-order search
 
+// Part 6: https://learn.freecodecamp.org/coding-interview-prep/data-structures/use-breadth-first-search-in-a-binary-search-tree
+// Instructions: Write Breadth first search functions for inorder and reverseorder searches.
 
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
@@ -271,6 +273,48 @@ function BinarySearchTree() {
     } else {
         return postOrderRecursive([], this.root);
     }
+  }
+  // change code above this line
+
+  // Part 6:
+  // change code below this line
+  this.levelOrder = () => {
+    return levelOrderCommon(false);
+  }
+
+  this.reverseLevelOrder = () => {
+    return levelOrderCommon(true);
+  }
+
+  let levelOrderCommon = (shouldReverse) => {
+      if (this.root === null) {
+        return null;
+    }
+    let values = [];
+    let nodeQueue = [];
+    nodeQueue.push(this.root);
+
+    while(nodeQueue.length > 0) {
+        let node = nodeQueue.shift();
+        values.push(node.value);
+        if (shouldReverse) {
+            if (node.right !== null) {
+                nodeQueue.push(node.right);
+            }
+            if (node.left !== null) {
+                nodeQueue.push(node.left);
+            }
+        }
+        else {
+            if (node.left !== null) {
+                nodeQueue.push(node.left);
+            }
+            if (node.right !== null) {
+                nodeQueue.push(node.right);
+            }
+        }
+    }
+    return values;
   }
   // change code above this line
 }
