@@ -26,85 +26,85 @@
 
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
+  this.value = value;
+  this.left = null;
+  this.right = null;
 }
 function BinarySearchTree() {
-    this.root = null;
-     
-    // Part 1: 
-    // change code below this line
-    // findMin should return the minimum value found in the BST
-    this.findMin = () => {
-      if (this.root === null) {
-          return null;
-      }
-      let node = this.root;
-      while (node.left !== null) {
-          node = node.left;
-      }
-      return node.value;
+  this.root = null;
+    
+  // Part 1: 
+  // change code below this line
+  // findMin should return the minimum value found in the BST
+  this.findMin = () => {
+    if (this.root === null) {
+        return null;
     }
-    // findMax should return the maximum value found in the BST
-    this.findMax = () => {
-      if (this.root === null) {
-          return null;
-      }
-      let node = this.root;
-      while (node.right !== null) {
-          node = node.right;
-      }
-      return node.value;
+    let node = this.root;
+    while (node.left !== null) {
+        node = node.left;
     }
-    // change code above this line
+    return node.value;
+  }
+  // findMax should return the maximum value found in the BST
+  this.findMax = () => {
+    if (this.root === null) {
+        return null;
+    }
+    let node = this.root;
+    while (node.right !== null) {
+        node = node.right;
+    }
+    return node.value;
+  }
+  // change code above this line
 
-    // Part 2: 
-    // change code below this line
-    // add should accept an integer, and add it to the tree.
-    // if the value already exists return null, if successful return undefined.
-    // this.add = (value) => {
-    //     if (this.root === null) {
-    //         this.root = new Node(value);
-    //         return undefined;
-    //     }
-    //     let prevNode = this.root;
-    //     let node = this.root;
-    //     while (node !== null) {
-    //         if (node.value === value) {
-    //             return null;
-    //         }
-    //         prevNode = node;
-    //         if (node.value > value) {
-    //             node = node.left;
-    //         } else if (node.value < value) {
-    //             node = node.right;
-    //         }
-    //     }
-    //     if (prevNode.value > value) {
-    //         prevNode.left = new Node(value);
-    //         return undefined;
-    //     } else if (prevNode.value < value) {
-    //         prevNode.right = new Node(value);
-    //         return undefined;
-    //     }
-    // }
+  // Part 2: 
+  // change code below this line
+  // add should accept an integer, and add it to the tree.
+  // if the value already exists return null, if successful return undefined.
+  // this.add = (value) => {
+  //     if (this.root === null) {
+  //         this.root = new Node(value);
+  //         return undefined;
+  //     }
+  //     let prevNode = this.root;
+  //     let node = this.root;
+  //     while (node !== null) {
+  //         if (node.value === value) {
+  //             return null;
+  //         }
+  //         prevNode = node;
+  //         if (node.value > value) {
+  //             node = node.left;
+  //         } else if (node.value < value) {
+  //             node = node.right;
+  //         }
+  //     }
+  //     if (prevNode.value > value) {
+  //         prevNode.left = new Node(value);
+  //         return undefined;
+  //     } else if (prevNode.value < value) {
+  //         prevNode.right = new Node(value);
+  //         return undefined;
+  //     }
+  // }
 
-    // recursive
-    this.add = (value) => {
-      let addRecursive = (node, direction) => {
-        if (node[direction] === null) {
-            node[direction] = new Node(value);
-            return undefined;
-        } else if (node[direction].value === value) {
-            return null;
-        } else if (node[direction].value > value) {
-            return addRecursive(node[direction], 'left');
-        } else {
-            return addRecursive(node[direction], 'right');
-        }
+  // recursive
+  this.add = (value) => {
+    let addRecursive = (node, direction) => {
+      if (node[direction] === null) {
+          node[direction] = new Node(value);
+          return undefined;
+      } else if (node[direction].value === value) {
+          return null;
+      } else if (node[direction].value > value) {
+          return addRecursive(node[direction], 'left');
+      } else {
+          return addRecursive(node[direction], 'right');
       }
-      return addRecursive(this, 'root');
+    }
+    return addRecursive(this, 'root');
   }
   // change code above this line
 
@@ -353,6 +353,15 @@ function BinarySearchTree() {
       // case 1: target has no children, change code below this line
       if (numChildren === 0) {
         parent[direction] = null;
+      } 
+      // Part 8:
+      // case 2: target has one child, change the code below this line.
+      else if (numChildren === 1) {
+        if (removeNode.left !== null) {
+            parent[direction] = removeNode.left;
+        } else {
+            parent[direction] = removeNode.right;
+        }
       }
     } else {
         return null;
