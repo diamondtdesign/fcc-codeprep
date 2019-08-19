@@ -195,4 +195,37 @@ function BinarySearchTree() {
     }
   }
   // change code above this line
+
+  // Part 5:
+  // change code below this line
+  this.inorder = () => {
+    let inOrderRecursive = (values, node) => {
+        console.log(node.value);
+        console.log(values);
+        // begin search at left most node.
+        if (node.left !== null) {
+            // explore further subtree
+            values = inOrderRecursive(values, node.left);
+            // then add the node to the array (before exploring the right subtree)
+            values.push(node.value);
+        } else {
+            // Add the leaf to the array, and return the array.
+            values.push(node.value);
+            return values;
+        }
+        // end at right most node.
+        if (node.right !== null) {
+            // explore further
+            values = inOrderRecursive(values, node.right);
+        }
+        // retunr the ordered values.
+        return values;
+    }
+    if (this.root === null) {
+        return null;
+    } else {
+        return inOrderRecursive([], this.root);
+    }
+  }
+  // change code above this line
 }
