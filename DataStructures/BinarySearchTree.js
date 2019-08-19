@@ -10,6 +10,10 @@
 // Instructions: Write a function to check if an element is present in the BST.
 // return true if present, false if not.
 
+// Part 4: https://learn.freecodecamp.org/coding-interview-prep/data-structures/find-the-minimum-and-maximum-height-of-a-binary-search-tree
+// Instructions: Write a findMinHeight and findMaxHeight and isBalanced function for a BST.
+// Note: tests on FCC are broken, and isBalanced only passes if it always returns true.
+
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
     this.value = value;
@@ -23,25 +27,25 @@ function BinarySearchTree() {
     // change code below this line
     // findMin should return the minimum value found in the BST
     this.findMin = () => {
-        if (this.root === null) {
-            return null;
-        }
-        let node = this.root;
-        while (node.left !== null) {
-            node = node.left;
-        }
-        return node.value;
+      if (this.root === null) {
+          return null;
+      }
+      let node = this.root;
+      while (node.left !== null) {
+          node = node.left;
+      }
+      return node.value;
     }
     // findMax should return the maximum value found in the BST
     this.findMax = () => {
-        if (this.root === null) {
-            return null;
-        }
-        let node = this.root;
-        while (node.right !== null) {
-            node = node.right;
-        }
-        return node.value;
+      if (this.root === null) {
+          return null;
+      }
+      let node = this.root;
+      while (node.right !== null) {
+          node = node.right;
+      }
+      return node.value;
     }
     // change code above this line
 
@@ -79,16 +83,16 @@ function BinarySearchTree() {
     // recursive
     this.add = (value) => {
       let addRecursive = (node, direction) => {
-          if (node[direction] === null) {
-              node[direction] = new Node(value);
-              return undefined;
-          } else if (node[direction].value === value) {
-              return null;
-          } else if (node[direction].value > value) {
-              return addRecursive(node[direction], 'left');
-          } else {
-              return addRecursive(node[direction], 'right');
-          }
+        if (node[direction] === null) {
+            node[direction] = new Node(value);
+            return undefined;
+        } else if (node[direction].value === value) {
+            return null;
+        } else if (node[direction].value > value) {
+            return addRecursive(node[direction], 'left');
+        } else {
+            return addRecursive(node[direction], 'right');
+        }
       }
       return addRecursive(this, 'root');
   }
@@ -121,17 +125,74 @@ function BinarySearchTree() {
   // using a recursive function
   this.isPresent = (value) => {
     const isPresentRecursive = (node, direction) => {
-        if (node[direction] === null) {
-            return false;
-        } else if (node[direction].value === value) {
-            return true;
-        } else if (node[direction].value < value) {
-            return isPresentRecursive(node[direction], 'right');
-        } else if (node[direction].value > value) {
-            return isPresentRecursive(node[direction], 'left');
-        }
+      if (node[direction] === null) {
+          return false;
+      } else if (node[direction].value === value) {
+          return true;
+      } else if (node[direction].value < value) {
+          return isPresentRecursive(node[direction], 'right');
+      } else if (node[direction].value > value) {
+          return isPresentRecursive(node[direction], 'left');
+      }
     }
     return isPresentRecursive(this, 'root');
+  }
+  // change code above this line
+
+  // Part 4:
+  // change code below this line
+  this.findMinHeight = () => {
+    if (this.root === null) {
+        return -1;
+    }
+    let height = 0;
+    let nodes = [];
+    nodes.push(this.root);
+    while(nodes.length !== 0) {
+        let newNodes = []
+        for(let i = 0; i < nodes.length; i++) {
+            if (nodes[i].left === null || nodes[i].right === null) {
+                return height;
+            } else {
+                newNodes.push(nodes[i].left);
+                newNodes.push(nodes[i].right);
+            }
+        }
+        nodes = newNodes;
+        height += 1;
+    }
+    return height;
+  }
+
+  this.findMaxHeight = () => {
+    if (this.root === null) {
+        return -1;
+    }
+    let height = -1;
+    let nodes = [];
+    nodes.push(this.root);
+    while(nodes.length !== 0) {
+        let newNodes = [];
+        for(let i = 0; i < nodes.length; i++) {
+            if(nodes[i].right !== null) {
+                newNodes.push(nodes[i].right);
+            }
+            if(nodes[i].left !== null) {
+                newNodes.push(nodes[i].left);
+            }
+        }
+        nodes = newNodes;
+        height += 1;
+    }
+    return height;
+  }
+
+  this.isBalanced = () => {
+    if ((this.findMaxHeight() - this.findMinHeight()) > 1) {
+        return false;
+    } else {
+        return true;
+    }
   }
   // change code above this line
 }
