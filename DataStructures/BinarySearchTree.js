@@ -6,6 +6,10 @@
 // Instructions: Write a function to add an integer to the BST.
 // return null if duplicate value, undefined if successful.
 
+// Part 3: https://learn.freecodecamp.org/coding-interview-prep/data-structures/check-if-an-element-is-present-in-a-binary-search-tree
+// Instructions: Write a function to check if an element is present in the BST.
+// return true if present, false if not.
+
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
     this.value = value;
@@ -15,7 +19,8 @@ function Node(value) {
 function BinarySearchTree() {
     this.root = null;
      
-    // Part 1: change code below this line
+    // Part 1: 
+    // change code below this line
     // findMin should return the minimum value found in the BST
     this.findMin = () => {
         if (this.root === null) {
@@ -40,7 +45,8 @@ function BinarySearchTree() {
     }
     // change code above this line
 
-    // Part 2: change code below this line
+    // Part 2: 
+    // change code below this line
     // add should accept an integer, and add it to the tree.
     // if the value already exists return null, if successful return undefined.
     // this.add = (value) => {
@@ -79,12 +85,53 @@ function BinarySearchTree() {
           } else if (node[direction].value === value) {
               return null;
           } else if (node[direction].value > value) {
-              addRecursive(node[direction], 'left');
+              return addRecursive(node[direction], 'left');
           } else {
-              addRecursive(node[direction], 'right');
+              return addRecursive(node[direction], 'right');
           }
       }
-      addRecursive(this, 'root');
+      return addRecursive(this, 'root');
+  }
+  // change code above this line
+
+  // Part 3:
+  // change code below this line
+  // this.isPresent = (value) => {
+  //     let node = this.root;
+  //     while(node !== null) {
+  //         if (node.value === value) {
+  //             return true;
+  //         } else if (node.value > value) {
+  //             if (node.left === null) {
+  //                 return false;
+  //             } else {
+  //                 node = node.left;
+  //             }
+  //         } else if (node.value < value) {
+  //             if (node.right === null) {
+  //                 return false;
+  //             } else {
+  //                 node = node.right;
+  //             }
+  //         }
+  //     }
+  //     return false;
+  // }
+
+  // using a recursive function
+  this.isPresent = (value) => {
+    const isPresentRecursive = (node, direction) => {
+        if (node[direction] === null) {
+            return false;
+        } else if (node[direction].value === value) {
+            return true;
+        } else if (node[direction].value < value) {
+            return isPresentRecursive(node[direction], 'right');
+        } else if (node[direction].value > value) {
+            return isPresentRecursive(node[direction], 'left');
+        }
+    }
+    return isPresentRecursive(this, 'root');
   }
   // change code above this line
 }
