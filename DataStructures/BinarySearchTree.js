@@ -24,6 +24,12 @@
 // Instructions: Write a remove function that takes a value, and deletes the node if it is a leaf, return null if it is not a leaf.
 // Description also says to keep track of parent, and # of children the target node has.
 
+// Part 8: https://learn.freecodecamp.org/coding-interview-prep/data-structures/delete-a-node-with-one-child-in-a-binary-search-tree
+// Instructions: Add to remove function ability to delete a node with 1 child.
+
+// Part 9: https://learn.freecodecamp.org/coding-interview-prep/data-structures/delete-a-node-with-two-children-in-a-binary-search-tree
+// Instructions: Add to remove function ability to delete a node with 2 children.
+
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
   this.value = value;
@@ -361,6 +367,42 @@ function BinarySearchTree() {
             parent[direction] = removeNode.left;
         } else {
             parent[direction] = removeNode.right;
+        }
+      }
+      // Part 9:
+      // case 3: target has two children 
+      else {
+        // find smallest value in the right subtree of the target node.
+        const findSmallestNodeAndParentInTree = (rightSubTree) => {
+          // recursively look for the left-most node in the tree.
+          const recursiveLeft = (node, parent) => {
+            // no more left nodes, it's the smallest in the tree.
+            if (node.left === null) {
+              return [node, parent];
+            } else {
+              return recursiveLeft(node.left, node);
+            }
+          }
+          // if there's no left branch of the rightSubTree node, it's the smallest.
+          if (rightSubTree.left === null) {
+            return [rightSubTree, null];
+          } else {
+            // otherwise we need to recursively find the smallest in the branch.
+            return recursiveLeft(rightSubTree.left, rightSubTree);
+          }
+        }
+        // find the smallest node and it's parent in the right subtree of the target node.
+        let [smallestNode, smallestNodeParent] = findSmallestNodeAndParentInTree(removeNode.right);
+        if (smallestNodeParent !== null) {
+          // if we returned a parent, we don't want to leave a dangling branch.
+          // but also want to remove the smallest node from it's current spot.
+          smallestNodeParent.left = smallestNode.right;
+          removeNode.value = smallestNode.value;
+          console.log('has parent');
+        } else {
+          // otherwise there is just a single leaf as a child, so just set the value, and drop the right branch.
+           removeNode.value = smallestNode.value;
+           removeNode.right = null;
         }
       }
     } else {
