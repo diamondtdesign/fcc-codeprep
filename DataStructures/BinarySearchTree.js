@@ -1,3 +1,5 @@
+// Note: Each section was done seperately, other than adding the add function to each section past part 2 for testing purposes.
+
 // Part 1: https://learn.freecodecamp.org/coding-interview-prep/data-structures/find-the-minimum-and-maximum-value-in-a-binary-search-tree/
 // Instructions: Write functions to find the min and max value
 // of a binary search tree.
@@ -30,6 +32,9 @@
 // Part 9: https://learn.freecodecamp.org/coding-interview-prep/data-structures/delete-a-node-with-two-children-in-a-binary-search-tree
 // Instructions: Add to remove function ability to delete a node with 2 children.
 
+// Part 10: https://learn.freecodecamp.org/coding-interview-prep/data-structures/invert-a-binary-tree/
+// Instructions: Invert a binary tree. (Aka reverse a binary tree).
+
 var displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
 function Node(value) {
   this.value = value;
@@ -39,8 +44,7 @@ function Node(value) {
 function BinarySearchTree() {
   this.root = null;
     
-  // Part 1: 
-  // change code below this line
+  // Part 1: change code below this line
   // findMin should return the minimum value found in the BST
   this.findMin = () => {
     if (this.root === null) {
@@ -63,10 +67,9 @@ function BinarySearchTree() {
     }
     return node.value;
   }
-  // change code above this line
+  // Part 1: change code above this line
 
-  // Part 2: 
-  // change code below this line
+  // Part 2: change code below this line
   // add should accept an integer, and add it to the tree.
   // if the value already exists return null, if successful return undefined.
   // this.add = (value) => {
@@ -112,10 +115,9 @@ function BinarySearchTree() {
     }
     return addRecursive(this, 'root');
   }
-  // change code above this line
+  // Part 2: change code above this line
 
-  // Part 3:
-  // change code below this line
+  // Part 3: change code below this line
   // this.isPresent = (value) => {
   //     let node = this.root;
   //     while(node !== null) {
@@ -153,10 +155,9 @@ function BinarySearchTree() {
     }
     return isPresentRecursive(this, 'root');
   }
-  // change code above this line
+  // Part 3: change code above this line
 
-  // Part 4:
-  // change code below this line
+  // Part 4: change code below this line
   this.findMinHeight = () => {
     if (this.root === null) {
         return -1;
@@ -210,10 +211,9 @@ function BinarySearchTree() {
         return true;
     }
   }
-  // change code above this line
+  // Part 4: change code above this line
 
-  // Part 5:
-  // change code below this line
+  // Part 5: change code below this line
   this.inorder = () => {
     let inOrderRecursive = (values, node) => {
         // begin search at left most node.
@@ -284,10 +284,9 @@ function BinarySearchTree() {
         return postOrderRecursive([], this.root);
     }
   }
-  // change code above this line
+  // Part 5: change code above this line
 
-  // Part 6:
-  // change code below this line
+  // Part 6: change code below this line
   this.levelOrder = () => {
     return levelOrderCommon(false);
   }
@@ -326,9 +325,9 @@ function BinarySearchTree() {
     }
     return values;
   }
-  // change code above this line
+  // Part 6: change code above this line
 
-  // Part 7: 
+  // Part 7/8/9: change code below this line
   this.remove = (value) => {
     const findParentAndNodeRecursive = (node, direction) => {
       if (node[direction] === null) {
@@ -409,7 +408,27 @@ function BinarySearchTree() {
         return null;
     }
   }
-
+  // Part 7/8/9: change code above this line
+  // Part 10: change code below this line
+  this.invert = () => {
+    if (this.root!==null) {
+      let invertRecursive = (node) => {
+        let left = node.left;
+        node.left = node.right;
+        node.right = left;
+        if (node.left !== null) {
+            invertRecursive(node.left);
+        }
+        if (node.right !== null) {
+            invertRecursive(node.right);
+        }
+      }
+      invertRecursive(this.root);
+    } else {
+        return null;
+    }
+  }
+  // Part 10: change code above this line
 }
 
 let bst = new BinarySearchTree();
