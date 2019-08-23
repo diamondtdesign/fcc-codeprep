@@ -15,3 +15,22 @@ var undirectedAdjList = {
   Jenny: ["Jill", "Jeff"],
   Jeff: ["James", "Jenny"]
 };
+
+
+// https://learn.freecodecamp.org/coding-interview-prep/data-structures/adjacency-matrix
+// graphs can have weights on their edges depending on their application.
+// Instructions: Create an undirected adjacency matrix with 5 nodes
+// Connections:
+// 1 & 4,
+// 1 & 3,
+// 3 & 5,
+// 4 & 5,
+// all edge weights are 1.
+
+var adjMatUndirected = [
+  [0, 0, 1, 1, 0],
+  [0, 0, 0, 0, 0],
+  [1, 0, 0, 0, 1],
+  [1, 0, 0, 0, 1],
+  [0, 0, 1, 1, 0],
+ ];
