@@ -34,3 +34,20 @@ var adjMatUndirected = [
   [1, 0, 0, 0, 1],
   [0, 0, 1, 1, 0],
  ];
+
+// https://learn.freecodecamp.org/coding-interview-prep/data-structures/incidence-matrix
+// in an incidence matrix the columns are the edges and the rows are the nodes
+// a directed matrix uses -1 for an edge leaving a node
+// and 1 for an edge entering a node.
+
+// Instructions:
+// Create an undirected incidence matrix with 5 nodes & 4 edges,
+// Relationships:
+// 1 & 2, 2 & 3, 3 & 5, 4 & 2.
+var incMatUndirected = [
+  [1, 0, 0, 0],
+  [1, 1, 0, 1],
+  [0, 1, 1, 0],
+  [0, 0, 0, 1],
+  [0, 0, 1, 0]
+];
